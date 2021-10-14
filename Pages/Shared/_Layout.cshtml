@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Http
+@using System.Web;
+@inject IHttpContextAccessor httpContextaccessor
+@{
+    string username = httpContextaccessor.HttpContext.Request.Cookies["username"];
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - MineHopWebsite</title>
+    <link rel="stylesheet" href="~/css/DarkMode.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+<header>
+    <nav style="background-color: #554882;color: #ffffff" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-gray border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">MineHopWebsite</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
+                <ul class="navbar-nav flex-grow-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-page="/Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-page="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-page="/tutorial">Tutorial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-page="/leaderboard">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-page="/Forums/ForumIndex">Forums</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-page="/Store/Store">Store</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-page="/banlist">BanList</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                <ul class="navbar-nav flex-grow-20">
+                    @{
+                        if (username != null)
+                        {
+                            <li class="nav-item">
+                                <b class="nav-link text-white">Welcome @Program.XOR(username)!</b>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-page="/logout">logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-page="/login">Login</a>
+                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-page="/register">Register</a>
+                                </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container text-white" >
+        &copy; 2021 - MineHopWebsite - <a asp-area="" asp-page="/about">about</a>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

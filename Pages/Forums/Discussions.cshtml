@@ -1,0 +1,88 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Data.SqlClient
+@model MineHopWebsite.Pages.Forums.Discussions
+
+@{
+    ViewData["Title"] = "Discussions";
+    bool isAdmin = false;
+    if (HttpContext.Request.Cookies["username"] == null)
+    {
+        Response.Redirect("/NotLoggedIn");
+    }
+    if (HttpContext.Request.Cookies["username"] != null)
+    {
+        string username = HttpContext.Request.Cookies["username"];
+        SqlConnection sqlConnection = new SqlConnection("Data Source=SQL5108.site4now.net;Initial Catalog=db_a79d4e_minehopadmin;User Id=db_a79d4e_minehopadmin_admin;Password=ggk9p6tpeir69");
+        SqlCommand sqlCommand = new SqlCommand();
+        sqlCommand.Connection = sqlConnection;
+        sqlCommand.CommandText = "select * from Logins";
+        SqlDataReader dr;
+        bool isFound = false;
+        try
+        {
+            sqlConnection.Open();
+            dr = sqlCommand.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.GetString(dr.GetOrdinal("Username")).Equals(username))
+                {
+                    isFound = true;
+                }
+            }
+            dr.Close();
+        }
+        finally
+        {
+            sqlConnection.Close();
+        }
+        if (!isFound)
+        {
+            HttpContext.Response.Cookies.Append("username", "", new CookieOptions() {
+                Expires = DateTime.Now.AddDays(-1)
+            });
+            Response.Redirect("NotLoggedIn");
+        }
+    }
+    string username1 = Program.XOR(HttpContext.Request.Cookies["username"]);
+    foreach (string name in Program.Admins)
+    {
+        if (name.Equals(username1))
+        {
+            isAdmin = true;
+            break;
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<form method="post">
+    @{
+        
+        <h1 style="text-align: center;display: inline-block;padding-right: 0; padding-left: 400px">Discussions</h1>
+        
+        <div class="form-group" style="display: inline-block;padding-left: 50px">
+            <input type="submit" value="Create Discussion"  class="btn btn-primary" asp-page-handler="CreateForm" asp-route-sessioncount="0"/>
+        </div>
+        
+        <br><br>
+        
+        for (int i = 0; i < Program.DiscussionForums.Count; i++)
+        {
+            Forum forum = Program.DiscussionForums[i];
+            <center>
+            <input style="text-align: center;font-size: 24px;border: none;"
+                           asp-page-handler="Select" type="submit" 
+                           value="@forum.Title" 
+                           asp-route-sessioncount="@forum.Title~#$^&@Program.XOR(HttpContext.Request.Cookies["username"])"/></center>
+            if (isAdmin)
+            {
+                <center>
+                    <div class="form-group" style="display: inline-block;padding-left: 50px">
+                        <input type="submit" value="Delete Discussion" style="background-color: #c73732; border: #000000" class="btn btn-primary" asp-page-handler="RemoveReply" asp-route-sessioncount="@i"/>
+                    </div></center>
+            }
+        }
+    }
+</form>

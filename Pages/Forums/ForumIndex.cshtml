@@ -1,0 +1,54 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Data.SqlClient
+@model MineHopWebsite.Pages.Forums.ForumIndex
+
+@{
+    ViewData["Title"] = "ForumIndex";
+    if (HttpContext.Request.Cookies["username"] == null)
+    {
+        Response.Redirect("/NotLoggedIn");
+    }
+    if (HttpContext.Request.Cookies["username"] != null)
+    {
+        string username = HttpContext.Request.Cookies["username"];
+        SqlConnection sqlConnection = new SqlConnection("Data Source=SQL5108.site4now.net;Initial Catalog=db_a79d4e_minehopadmin;User Id=db_a79d4e_minehopadmin_admin;Password=ggk9p6tpeir69");
+        SqlCommand sqlCommand = new SqlCommand();
+        sqlCommand.Connection = sqlConnection;
+        sqlCommand.CommandText = "select * from Logins";
+        SqlDataReader dr;
+        bool isFound = false;
+        try
+        {
+            sqlConnection.Open();
+            dr = sqlCommand.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.GetString(dr.GetOrdinal("Username")).Equals(username))
+                {
+                    isFound = true;
+                }
+            }
+            dr.Close();
+        }
+        finally
+        {
+            sqlConnection.Close();
+        }
+        if (!isFound)
+        {
+            HttpContext.Response.Cookies.Append("username", "", new CookieOptions() {
+                Expires = DateTime.Now.AddDays(-1)
+            });
+            Response.Redirect("NotLoggedIn");
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<h1 style="text-align: center">Forums</h1>
+<br><br>
+<h3 style="text-align: center"><p><a asp-page="/Forums/Announcements">Announcements</a></p></h3><br>
+<h3 style="text-align: center"><p><a asp-page="/Forums/BanAppeals">BanAppeal</a></p></h3><br>
+<h3 style="text-align: center"><p><a asp-page="/Forums/Discussions">Discussion</a></p></h3><br>

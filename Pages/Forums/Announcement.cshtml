@@ -1,0 +1,107 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Data.SqlClient
+@model MineHopWebsite.Pages.Forums.Announcement
+
+@{
+    ViewData["Title"] = "Announcement";
+    Forum forum = null;
+    bool isAdmin = false;
+    if (HttpContext.Request.Cookies["username"] == null || !Program.SelctedForums.ContainsKey(Program.XOR(HttpContext.Request.Cookies["username"])))
+    {
+        Response.Redirect("/NotLoggedIn");
+    }
+    if (HttpContext.Request.Cookies["username"] != null)
+    {
+        string username = HttpContext.Request.Cookies["username"];
+        SqlConnection sqlConnection = new SqlConnection("Data Source=SQL5108.site4now.net;Initial Catalog=db_a79d4e_minehopadmin;User Id=db_a79d4e_minehopadmin_admin;Password=ggk9p6tpeir69");
+        SqlCommand sqlCommand = new SqlCommand();
+        sqlCommand.Connection = sqlConnection;
+        sqlCommand.CommandText = "select * from Logins";
+        SqlDataReader dr;
+        bool isFound = false;
+        try
+        {
+            sqlConnection.Open();
+            dr = sqlCommand.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.GetString(dr.GetOrdinal("Username")).Equals(username))
+                {
+                    isFound = true;
+                }
+            }
+            dr.Close();
+        }
+        finally
+        {
+            sqlConnection.Close();
+        }
+        if (!isFound)
+        {
+            HttpContext.Response.Cookies.Append("username", "", new CookieOptions() {
+                Expires = DateTime.Now.AddDays(-1)
+            });
+            Response.Redirect("NotLoggedIn");
+        }
+    }
+    string username1 = Program.XOR(HttpContext.Request.Cookies["username"]);
+    forum = Program.SelctedForums[Program.XOR(HttpContext.Request.Cookies["username"])];
+    foreach (string name in Program.Admins)
+    {
+        if (name.Equals(username1))
+        {
+            isAdmin = true;
+            break;
+        }
+    }
+}
+<!DOCTYPE html>
+
+<div style="border: 2px solid black;">
+    <h1 style="text-align: center;font-size: 55px">@forum.Title</h1>
+    <br>
+    <center><b style="text-align: center;font-size: 22px">Announcement by,  @forum.Author</b></center>
+    <br><br>
+    <p style="font-size: 20px;white-space: normal;overflow-wrap: break-word;width: 72vw;">@forum.Body</p>
+</div>
+<br>
+<br>
+<form method="post">
+<h3 style="text-align: center;display: inline-block;padding-left: 510px">Replies</h3>
+<div class="form-group" style="display: inline-block;padding-left: 50px"> 
+        <input type="submit" value="Create Reply" class="btn btn-primary" asp-page-handler="CreateThread" asp-route-sessioncount="30"/> 
+    </div>
+</form>
+<br>
+@{
+    for (int i = 0; i < forum.Replies.Count; i++)
+    {
+        Forum reply = forum.Replies[i];
+        if (isAdmin)
+        {
+            <form method="post">
+                <div style="border: 2px solid black;">
+                    <b style="text-align: center;display: inline-block; padding-right: 0; padding-left: 510px">Reply by, @reply.Author</b>
+                    <div class="form-group" style="display: inline-block;padding-left: 50px">
+                        <input type="submit" value="Delete Reply" style="background-color: #c73732; border: #000000" class="btn btn-primary" asp-page-handler="RemoveReply" asp-route-sessioncount="@i"/>
+                    </div>
+                    <br>
+                    <p style="white-space: normal;overflow-wrap: break-word;width: 72vw">@reply.Body</p>
+                </div>
+                <br>
+                <br>
+            </form>
+        }
+        else
+        {
+            <div style="border: 2px solid black;">
+                <center style=""><b style="text-align: center;">Reply by, @reply.Author</b></center>
+                <br>
+                <p style="">@reply.Body</p>
+            </div>
+            <br>
+            <br>
+        }
+    }
+}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="MinehopWebsite-Main" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="MinehopWebsite-Main">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/.dockerignore" web="/" />
+            <mapping local="$PROJECT_DIR$/.gitignore" web="/" />
+            <mapping local="$PROJECT_DIR$/Dockerfile" web="/" />
+            <mapping local="$PROJECT_DIR$/MineHopWebsite.csproj" web="/" />
+            <mapping local="$PROJECT_DIR$/MineHopWebsite.sln" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/About.cshtml" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/About.cshtml.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/Error.cshtml" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/Error.cshtml.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/Index.cshtml" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/Index.cshtml.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/Shared/_Layout.cshtml" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/Shared/_ValidationScriptsPartial.cshtml" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/_ViewImports.cshtml" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/_ViewStart.cshtml" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/leaderboard.cshtml" web="/" />
+            <mapping local="$PROJECT_DIR$/Pages/leaderboard.cshtml.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Program.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Properties/launchSettings.json" web="/" />
+            <mapping local="$PROJECT_DIR$/ServerSocket.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Startup.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/appsettings.Development.json" web="/" />
+            <mapping local="$PROJECT_DIR$/appsettings.json" web="/" />
+            <mapping local="$PROJECT_DIR$/leaderboard.json" web="/" />
+            <mapping local="$PROJECT_DIR$/obj/Release/net5.0/MineHopWebsite.AssemblyInfo.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/obj/Release/net5.0/MineHopWebsite.RazorAssemblyInfo.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/css/DarkMode.css" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/css/site.css" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/favicon.ico" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/js/site.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/LICENSE" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap.css" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery-validation/LICENSE.md" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery-validation/dist/additional-methods.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery-validation/dist/additional-methods.min.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery-validation/dist/jquery.validate.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery/LICENSE.txt" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery/dist/jquery.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery/dist/jquery.min.js" web="/" />
+            <mapping local="$PROJECT_DIR$/wwwroot/lib/jquery/dist/jquery.min.map" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

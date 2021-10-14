@@ -1,0 +1,78 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Data.SqlClient
+@model MineHopWebsite.Pages.Forums.CreateThread
+
+@{
+    ViewData["Title"] = "CreateThread";
+    Forum forum = null;
+    if (HttpContext.Request.Cookies["username"] == null || !Program.SelctedForums.ContainsKey(Program.XOR(HttpContext.Request.Cookies["username"])))
+    {
+        Response.Redirect("/NotLoggedIn");
+    }
+    if (HttpContext.Request.Cookies["username"] != null)
+    {
+        string username = HttpContext.Request.Cookies["username"];
+        SqlConnection sqlConnection = new SqlConnection("Data Source=SQL5108.site4now.net;Initial Catalog=db_a79d4e_minehopadmin;User Id=db_a79d4e_minehopadmin_admin;Password=ggk9p6tpeir69");
+        SqlCommand sqlCommand = new SqlCommand();
+        sqlCommand.Connection = sqlConnection;
+        sqlCommand.CommandText = "select * from Logins";
+        SqlDataReader dr;
+        bool isFound = false;
+        try
+        {
+            sqlConnection.Open();
+            dr = sqlCommand.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.GetString(dr.GetOrdinal("Username")).Equals(username))
+                {
+                    isFound = true;
+                }
+            }
+            dr.Close();
+        }
+        finally
+        {
+            sqlConnection.Close();
+        }
+        if (!isFound)
+        {
+            HttpContext.Response.Cookies.Append("username", "", new CookieOptions() {
+                Expires = DateTime.Now.AddDays(-1)
+            });
+            Response.Redirect("NotLoggedIn");
+        }
+    }
+    else
+    {
+        forum = Program.SelctedForums[Program.XOR(HttpContext.Request.Cookies["username"])];
+    }
+}
+
+<!DOCTYPE html>
+
+    <h1>Create Thread</h1>
+    
+    <div class="row">  
+        <div class="col-md-9">  
+            <form method="post"> @*asp-page="Index"*@  
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>  
+                  
+                <div class="form-group">  
+                    <label asp-for="Title" style="font-size: 20px;" class="control-label"></label>  
+                    <input asp-for="Title" id="TitleInput" name="TitleInput" runat="server" style="width: 800px" class="form-control"/>
+                    <span asp-validation-for="Title" class="text-danger"></span>  
+                </div>  
+                <div class="form-group">  
+                    <label asp-for="Body" style="font-size: 20px;" class="control-label"></label>
+                    <textarea asp-for="Body" id="BodyInput" name="BodyInput" class="form-control" TextMode="MultiLine" style=";height: 200px;text-align: left;" runat="server"></textarea>  
+                    <span asp-validation-for="Body" class="text-danger"></span>  
+                </div>
+                <div class="form-group">  
+                    <input type="submit" value="Create Reply" class="btn btn-primary" asp-page-handler="CreateReply" asp-route-sessioncount="30" /> 
+                </div>
+                <b>@ViewData["msg"]</b>  
+                    </form>  
+                </div>  
+    </div>  

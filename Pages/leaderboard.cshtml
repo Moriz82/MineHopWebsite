@@ -1,0 +1,52 @@
+﻿@page
+@using SpeedrunComSharp
+@{
+    ViewData["Title"] = "Leaderboard";
+}
+
+<div class="text-center" xmlns="http://www.w3.org/1999/html">
+    <h1 class="display-4">Leaderboards</h1>
+    <p></p>
+</div>
+
+<div>
+    <h1 class="display-5 text-left" style="display: inline-block;padding-left: 80px;">UnOfficial</h1>
+    <h1 class="display-5 text-right" style="display: inline-block;padding-left: 590px;">Official</h1>
+    <p></p>
+</div>
+<div style="display: inline-block;padding-left: 0"></div>
+<div style="display: inline-block;padding-left: 0;" border="1" width="39%"  class="table-bordered table-light table-primary">
+    <table>
+        <tr>
+            <th style="text-align: center;padding-left: 40px;padding-right: 40px;">Map</th>
+            <th style="text-align: center;padding-left: 30px;padding-right: 30px;">Player</th>
+            <th style="text-align: center;padding-left: 30px;padding-right: 30px;">Time</th>
+        </tr>
+        @foreach(LeaderElement e in Program.leaderboard)
+        {
+            <tr>
+                <td style="text-align: center;">@e.mapName</td>
+                <td style="text-align: center;">@e.displayName</td>
+                <td style="text-align: center;">@e.time</td>
+            </tr>
+        }
+    </table>
+</div>
+<div style="display: inline-block;padding-right: 420px;"></div>
+<div style="display: inline-block;" border="1" width="39%"  class="table-bordered table-light table-primary">
+    <table>
+        <tr>
+            <th style="text-align: center;padding-left: 40px;padding-right: 40px;">Map</th>
+            <th style="text-align: center;padding-left: 30px;padding-right: 30px;">Player</th>
+            <th style="text-align: center;padding-left: 30px;padding-right: 30px;">Time</th>
+        </tr>
+        @foreach(LeaderElement e in Program.leaderboard)
+        {
+            <tr>
+                <td style="text-align: center;">@e.mapName</td>
+                <td style="text-align: center;">@e.displayName</td>
+                <td style="text-align: center;">@e.time</td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,60 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Data.SqlClient
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+    /*string username = HttpContext.Request.Cookies["username"];
+    if (username != null)
+    {
+        Response.Redirect("Index");
+    }*/
+    if (HttpContext.Request.Cookies["username"] != null)
+    {
+        string username = HttpContext.Request.Cookies["username"];
+        SqlConnection sqlConnection = new SqlConnection("Data Source=SQL5108.site4now.net;Initial Catalog=db_a79d4e_minehopadmin;User Id=db_a79d4e_minehopadmin_admin;Password=ggk9p6tpeir69");
+        SqlCommand sqlCommand = new SqlCommand();
+        sqlCommand.Connection = sqlConnection;
+        sqlCommand.CommandText = "select * from Logins";
+        SqlDataReader dr;
+        bool isFound = false;
+        try
+        {
+            sqlConnection.Open();
+            dr = sqlCommand.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.GetString(dr.GetOrdinal("Username")).Equals(username))
+                {
+                    isFound = true;
+                }
+            }
+            dr.Close();
+        }
+        finally
+        {
+            sqlConnection.Close();
+        }
+        if (!isFound)
+        {
+            HttpContext.Response.Cookies.Append("username", "", new CookieOptions() {
+                Expires = DateTime.Now.AddDays(-1)
+            });
+            Response.Redirect("NotLoggedIn");
+        }
+    }
+}
+<script src="https://cdn.jsdelivr.net/gh/leonardosnt/mc-player-counter/dist/mc-player-counter.min.js"></script>
+<div class="text-center" xmlns="">
+    <h1 class="display-4" style="color: #ff5959">Welcome to Minehop!</h1>
+    <p>Submit your times at <a href="https://speedrun.com/minehop">speedrun.com/minehop</a>.</p>
+    <br>
+    <p>There are <span data-playercounter-ip="play.minehop.net">0</span> players online!</p>
+    <br>
+    <b style="font-size: 20px">Server address is play.minehop.net</b>
+    <br>
+    <br>
+</div>
+<div style="position: relative;padding-bottom: 56.25%;height: 0;"><center>
+    <iframe frameborder="0" src="https://www.youtube.com/embed/ThJLnhPT60g?loop=1&autoplay=1"  style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></iframe>
+</center></div>
